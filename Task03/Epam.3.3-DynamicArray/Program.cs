@@ -16,7 +16,6 @@ namespace Epam._3._3_DynamicArray
             arr[2] = 3;
             DynamicArray<int> str = new DynamicArray<int>(arr);
             str.Insert(55, 1);
-            str.Remove(55);
             Console.ReadKey();
         }
     }
