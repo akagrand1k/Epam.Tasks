@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam._3._3_DynamicArray
+namespace Epam._3._4_DynamicArray_Hardcore
 {
-    public class DynamicArray<T> : IEnumerable, IEnumerable<T>
+    public class DynamicArray<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
-        private T[] myArr;
-        private int length;
         private int capacity;
+        private int length;
+        private T[] myArr;
 
         public DynamicArray()
         {
@@ -35,6 +35,58 @@ namespace Epam._3._3_DynamicArray
             Array.Copy((Array)coll, myArr, coll.Count());
         }
 
+        public int Capacity
+        {
+            get
+            {
+                if (capacity < 0)
+                    throw new ArgumentOutOfRangeException();
+                return capacity;
+            }
+            set
+            {
+                capacity = value;
+                length = capacity;
+                Array.Resize(ref myArr, capacity);
+            }
+        }
+
+        public int Length
+        {
+            get
+            {
+                if (length < 0)
+                    throw new ArgumentOutOfRangeException();
+                return length;
+            }
+        }
+
+        public T this[int index]
+        {
+            get
+            {
+                if (index < 0)
+                {
+                    index = length + index;
+                }
+                return myArr[index];
+            }
+            set
+            {
+                if (index < 0 && index >= myArr.Length)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                if (length == capacity)
+                {
+                    capacity = capacity + 1;
+                    Array.Resize(ref myArr, capacity);
+                }
+                myArr[index] = value;
+                length++;
+            }
+        }
+
         public void Add(T item)
         {
             if (length == capacity - 1)
@@ -55,17 +107,22 @@ namespace Epam._3._3_DynamicArray
             capacity += countElement;
         }
 
-        public bool Remove(T item)
+        public object Clone()
         {
-            for (int i = 0; i < myArr.Length; i++)
+            return this.MemberwiseClone() as DynamicArray<T>;
+        }
+
+        public virtual IEnumerator GetEnumerator()
+        {
+            return myArr.GetEnumerator();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            foreach (T item in myArr)
             {
-                if (myArr[i].Equals(item))
-                {
-                    RemoveByIndex(i);
-                    return true;
-                }
+                yield return item;
             }
-            return false;
         }
 
         public bool Insert(T item, int index)
@@ -89,58 +146,24 @@ namespace Epam._3._3_DynamicArray
             return false;
         }
 
-        public int Capacity
+        public bool Remove(T item)
         {
-            get
+            for (int i = 0; i < myArr.Length; i++)
             {
-                if (capacity < 0)
-                    throw new ArgumentException();
-                return capacity;
-            }
-        }
-
-        public int Length
-        {
-            get
-            {
-                if (length < 0)
-                    throw new ArgumentNullException();
-                return length;
-            }
-        }
-
-        public T this[int index]
-        {
-            get
-            {
-                if (index < 0 && index >= myArr.Length)
+                if (myArr[i].Equals(item))
                 {
-                    throw new ArgumentOutOfRangeException();
+                    RemoveByIndex(i);
+                    return true;
                 }
-                return myArr[index];
             }
-            set
-            {
-                if (index < 0 && index >= myArr.Length)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-                myArr[index] = value;
-                length++;
-            }
+            return false;
         }
 
-        public IEnumerator GetEnumerator()
+        public T[] ToArray()
         {
-            return myArr.GetEnumerator();
-        }
-
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            foreach (T item in myArr)
-            {
-                yield return item;
-            }
+            T[] temp = new T[length];
+            Array.Copy(myArr, 0, temp, 0, length);
+            return temp;
         }
 
         private bool RemoveByIndex(int index)

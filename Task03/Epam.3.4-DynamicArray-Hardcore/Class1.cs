@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam._3._3_DynamicArray
+namespace Epam._3._4_DynamicArray_Hardcore
 {
-    class Program
+    public class Class1
     {
-        static void Main()
-        {
-
-        }
     }
 }
