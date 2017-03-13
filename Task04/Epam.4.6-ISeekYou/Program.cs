@@ -76,6 +76,11 @@ namespace Epam._4._6_ISeekYou
             if (array == null)
                 throw new ArgumentNullException();
 
+            if (func==null)
+            {
+                throw new ArgumentNullException(nameof(func));
+            }
+
             for (int i = 0; i < array.Length; i++)
             {
                 if (func(array[i]))

@@ -29,6 +29,10 @@ namespace Epam._4._3_SortingUnit
 
         private static void Sort(Action endSort)
         {
+            if (endSort == null)
+            {
+                throw new ArgumentNullException(nameof(endSort));
+            }
             int[] arr = { 5, 6, 8, 90, 150, 30, 123, 1230, 165, 0, 351, 651, 615, 6158 };
             CustomSort.Sort(arr, SortCondition);
             foreach (var item in arr)
