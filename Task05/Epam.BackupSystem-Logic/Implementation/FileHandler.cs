@@ -1,5 +1,6 @@
 ﻿using Epam.BackupSystem_Logic.Contract;
 using Epam.BackupSystem_Logic.Tools;
+using Epam.BackupSystem_Logic.Tools.constants;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,12 +21,20 @@ namespace Epam.BackupSystem_Logic.Implementation
                 Directory.CreateDirectory(folder);
         }
 
-        public void FileCopy(string sourcePath, string destinationPath)
+        public void FileBackupCopy(string sourcePath, string destinationPath)
         {
             if (string.IsNullOrWhiteSpace(sourcePath) || string.IsNullOrWhiteSpace(destinationPath))
                 throw new ArgumentException();
 
             File.Copy(sourcePath, RenameFileByDate(sourcePath,destinationPath));
+        }
+
+        public void FileStorageCopy(string sourcePath, string destinationPath)
+        {
+            if (string.IsNullOrWhiteSpace(sourcePath) || string.IsNullOrWhiteSpace(destinationPath))
+                throw new ArgumentException();
+
+            File.Copy(sourcePath, RemoveDateInName(destinationPath),true);
         }
 
         public void FileWriter(string message, string filePath)
@@ -36,12 +45,35 @@ namespace Epam.BackupSystem_Logic.Implementation
             File.AppendAllText(filePath, message, Encoding.Default);
         }
 
+        public List<string> GetFilesByDate(DateTime date)
+        {
+            FileInfo info = null;
+            var allfiles = Directory.GetFiles(Folders.Backup);
+            List<string> temp = new List<string>();
+            foreach (var item in allfiles)
+            {
+                info = new FileInfo(item);
+                if (info.LastWriteTime <= date)
+                {
+                    temp.Add(item);
+                }
+            }
+            return temp;
+        }
+
+        
+
+        private string RemoveDateInName(string str)
+        {
+            var temp = str.Replace("_backup_","");
+            return temp;
+        }
         private string RenameFileByDate(string sourcePath,string destinationPath)
         {
             FileInfo info = new FileInfo(sourcePath);
 
             var newFileName = Directory.GetParent(info.Name) + @"\" + destinationPath + @"\" + 
-                Path.GetFileNameWithoutExtension(info.Name) + "_" + Helpers.DateTimeFormat(DateTime.Now) + info.Extension;
+                Path.GetFileNameWithoutExtension(info.Name) + "_backup_" + Helpers.DateTimeFormat(DateTime.Now) + info.Extension;
 
             return newFileName;
         }
