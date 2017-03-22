@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.BackupSystem-UI", "Epam.BackupSystem-UI\Epam.BackupSystem-UI.csproj", "{C139DE88-4578-4ADE-8D8A-3CF74B7C61F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.BackupSystem-Logic", "Epam.BackupSystem-Logic\Epam.BackupSystem-Logic.csproj", "{E1D968B9-4E0A-44C9-83B8-6CBFF7D91BFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C139DE88-4578-4ADE-8D8A-3CF74B7C61F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C139DE88-4578-4ADE-8D8A-3CF74B7C61F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C139DE88-4578-4ADE-8D8A-3CF74B7C61F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C139DE88-4578-4ADE-8D8A-3CF74B7C61F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1D968B9-4E0A-44C9-83B8-6CBFF7D91BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D968B9-4E0A-44C9-83B8-6CBFF7D91BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D968B9-4E0A-44C9-83B8-6CBFF7D91BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D968B9-4E0A-44C9-83B8-6CBFF7D91BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
