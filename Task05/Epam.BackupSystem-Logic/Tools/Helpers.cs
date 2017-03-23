@@ -14,16 +14,36 @@ namespace Epam.BackupSystem_Logic.Tools
         private static Logger logger = new Logger();
         private static FileHandler handler = new FileHandler();
 
+        /// <summary>
+        /// For renamed files proccessing backup
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+
         public static string DateTimeFormat(DateTime date)
         {
             return DateTime.Now.ToString("dd.MM.yy H.mm");
+        }
+        
+        /// <summary>
+        /// Try parse custom date
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns>DateTime</returns>
+        public static DateTime DateParse(string str)
+        {
+            DateTime dt = DateTime.MinValue;
+            dt = DateTime.ParseExact(str, "dd.MM.yyyy HH:m", null);
+            return dt;
         }
 
         public static void FilesChangeEvent(object sender,FileSystemEventArgs e)
        { 
             Console.WriteLine("File changed: " + e.Name + " " + e.ChangeType);
             logger.SendLog("File changed: " + e.Name + " " + e.ChangeType, Folders.LogFile);
-            handler.FileCopy(Folders.Storage + @"\" + e.Name, Folders.Backup);
+
+            handler.FileBackupCopy(Folders.Storage + @"\" + e.Name, Folders.Backup);
+
         }
     }
 }

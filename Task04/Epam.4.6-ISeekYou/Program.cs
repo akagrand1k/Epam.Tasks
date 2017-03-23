@@ -16,7 +16,7 @@ namespace Epam._4._6_ISeekYou
 
         static void Main(string[] args)
         {
-            Func<int, bool> con = delegate (int x) { return x > 0; };
+            Predicate<int> con = delegate (int x) { return x > 0; };
             int[] arr = Enumerable.Range(0, 10000)
                 .Select(r => rnd.Next(-5000,5000)).ToArray();
 
@@ -25,12 +25,11 @@ namespace Epam._4._6_ISeekYou
                 Console.WriteLine(sw.CheckTime(() => LambdaExpression(arr, con), 1000));
                 Console.WriteLine(sw.CheckTime(() => LambdaExpression(arr, (x) => x > 0), 1000));
                 Console.WriteLine(sw.CheckTime(() => arr.Where(x => x > 0), 1000));
-                Thread.Sleep(5000);
 
             Console.ReadKey();
         }
 
-        private static int[] FindPositiveElement(int[] array) // 1
+        private static int[] FindPositiveElement(int[] array) //2
         {
             List<int> var = new List<int>();
 
@@ -39,12 +38,12 @@ namespace Epam._4._6_ISeekYou
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i]>0)
+                if ((array[i])>0)
                 {
                     var.Add(array[i]);
                 }
             }
-            
+
             return var.ToArray();
         }
 
@@ -69,7 +68,7 @@ namespace Epam._4._6_ISeekYou
             return var.ToArray();
         }
 
-        private static int[] LambdaExpression(int[] array,Func<int,bool> func) //3
+        private static int[] LambdaExpression(int[] array,Predicate<int> func) //3
         {
             List<int> var = new List<int>();
 

@@ -8,8 +8,10 @@ namespace Epam.BackupSystem_Logic.Contract
 {
     public interface IFileHandler
     {
-        void FileCopy(string sourcePath,string destinationPath);
         void FileWriter(string message,string filePath);
+        void FileBackupCopy(string sourcePath,string destinationPath);
+        void FileStorageCopy(string sourcePath, string destinationPath);
+        List<string> GetFilesByDate(DateTime date);
         void CheckExistFolder(string folder);
     }
 }
