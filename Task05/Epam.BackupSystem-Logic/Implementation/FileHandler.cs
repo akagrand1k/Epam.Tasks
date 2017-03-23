@@ -61,11 +61,10 @@ namespace Epam.BackupSystem_Logic.Implementation
             return temp;
         }
 
-        
-
         private string RemoveDateInName(string str)
         {
-            var temp = str.Replace("_backup_","");
+            FileInfo info = new FileInfo(str);
+            var temp = str.Remove(str.IndexOf("_backup_")) + info.Extension;
             return temp;
         }
 

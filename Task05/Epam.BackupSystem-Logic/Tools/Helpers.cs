@@ -13,7 +13,7 @@ namespace Epam.BackupSystem_Logic.Tools
     {
         private static Logger logger = new Logger();
         private static FileHandler handler = new FileHandler();
-
+        private static DateTime lastRead = DateTime.MinValue;
         /// <summary>
         /// For renamed files proccessing backup
         /// </summary>
@@ -22,7 +22,7 @@ namespace Epam.BackupSystem_Logic.Tools
 
         public static string DateTimeFormat(DateTime date)
         {
-            return DateTime.Now.ToString("dd.MM.yy H.mm");
+            return DateTime.Now.ToString("dd.MM.yy H.mm.s");
         }
         
         /// <summary>
@@ -37,13 +37,21 @@ namespace Epam.BackupSystem_Logic.Tools
             return dt;
         }
 
-        public static void FilesChangeEvent(object sender,FileSystemEventArgs e)
-       { 
-            Console.WriteLine("File changed: " + e.Name + " " + e.ChangeType);
-            logger.SendLog("File changed: " + e.Name + " " + e.ChangeType, Folders.LogFile);
-
-            handler.FileBackupCopy(Folders.Storage + @"\" + e.Name, Folders.Backup);
-
+        /// <summary>
+        /// Delegate for change events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public static void FilesChangeEvent(object sender, FileSystemEventArgs e)
+        {
+            DateTime lastWriteTime = File.GetLastWriteTime(e.FullPath);
+            if (lastWriteTime != lastRead)
+            {
+                Console.WriteLine("File changed: " + e.Name + " " + e.ChangeType);
+                logger.SendLog("File changed: " + e.Name + " " + e.ChangeType, Folders.LogFile);
+                handler.FileBackupCopy(Folders.Storage + @"\" + e.Name, Folders.Backup);
+                lastRead = lastWriteTime;
+            }
         }
     }
 }
