@@ -20,7 +20,7 @@ namespace Epam.BackupSystem_Logic.Implementation
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
         }
-
+        
         public void FileBackupCopy(string sourcePath, string destinationPath)
         {
             if (string.IsNullOrWhiteSpace(sourcePath) || string.IsNullOrWhiteSpace(destinationPath))
@@ -28,7 +28,7 @@ namespace Epam.BackupSystem_Logic.Implementation
 
             File.Copy(sourcePath, RenameFileByDate(sourcePath,destinationPath));
         }
-
+        
         public void FileStorageCopy(string sourcePath, string destinationPath)
         {
             if (string.IsNullOrWhiteSpace(sourcePath) || string.IsNullOrWhiteSpace(destinationPath))
@@ -61,18 +61,19 @@ namespace Epam.BackupSystem_Logic.Implementation
             return temp;
         }
 
-        
-
         private string RemoveDateInName(string str)
         {
-            var temp = str.Replace("_backup_","");
+            FileInfo info = new FileInfo(str);
+            var temp = str.Remove(str.IndexOf("_backup_")) + info.Extension;
             return temp;
         }
+
         private string RenameFileByDate(string sourcePath,string destinationPath)
         {
             FileInfo info = new FileInfo(sourcePath);
 
             var newFileName = Directory.GetParent(info.Name) + @"\" + destinationPath + @"\" + 
+
                 Path.GetFileNameWithoutExtension(info.Name) + "_backup_" + Helpers.DateTimeFormat(DateTime.Now) + info.Extension;
 
             return newFileName;

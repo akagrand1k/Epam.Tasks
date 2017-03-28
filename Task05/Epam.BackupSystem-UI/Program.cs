@@ -15,7 +15,6 @@ namespace Epam.BackupSystem_UI
     class Program
     {
         private static FileHandler handler = new FileHandler();
-        private static FolderListener listener = new FolderListener();
 
         static void Main(string[] args)
         {
@@ -35,7 +34,7 @@ namespace Epam.BackupSystem_UI
 
         private static void WelcomeMenu()
         {
-            Console.WriteLine("Hello choose function:"
+            Console.WriteLine("Hello choose function:\n"
                 + "Press 1 - Monitoring Mode\n"
                 + "Press 2 - Restoring Mode\n"
                 + "Press q(Q) - for exit application\n"
@@ -44,20 +43,21 @@ namespace Epam.BackupSystem_UI
             var input = Console.ReadKey();
             switch (input.Key)
             {
-                
                 case ConsoleKey.D1:
-                    Console.WriteLine("Monitoring Mode\n");
-                    listener.RunListen(Folders.Storage, "*.txt", Helpers.FilesChangeEvent);
+                    Console.WriteLine("\nMonitoring Mode\n");
+                    Listener.RunListen(Folders.Storage, "*.txt", Helpers.FilesChangeEvent);
                     break;
 
                 case ConsoleKey.D2:
-                    Console.WriteLine("Restoring Mode\n Write restore date. Date format = dd.MM.yyyy HH.m\n");
-                    listener.RoolBackChange(Helpers.DateParse(Console.ReadLine()));
-                    Console.WriteLine("Restored successfull");
+                    Console.WriteLine("\nRestoring Mode\n Write restore date. Date format = dd.MM.yyyy HH:m\n");
+                    RollBack.RoolBackChange(Helpers.DateParse(Console.ReadLine()));
+                    Console.WriteLine("\nRestored successfull");
+                    Console.ReadKey();
                     break;
 
                 case ConsoleKey.Q:
-                    Console.WriteLine("Application closed...");
+                    Console.WriteLine("\nApplication closed...");
+                    Console.ReadKey();
                     return;
             }
         }
