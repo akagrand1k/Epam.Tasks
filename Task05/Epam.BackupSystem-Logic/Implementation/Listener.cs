@@ -28,19 +28,25 @@ namespace Epam.BackupSystem_Logic.Implementation
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public static void RunListen(string folder, string extensionFilter, Action<object, FileSystemEventArgs> sender)
         {
-            FileSystemWatcher watcher = new FileSystemWatcher(folder, extensionFilter);
+            if (sender != null)
+            {
+                FileSystemWatcher watcher = new FileSystemWatcher(folder, extensionFilter);
 
-            watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-               | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
+                   | NotifyFilters.FileName | NotifyFilters.DirectoryName;
 
 
-            watcher.Created += new FileSystemEventHandler(sender);
-            watcher.Changed += new FileSystemEventHandler(sender);
+                watcher.Created += new FileSystemEventHandler(sender);
+                watcher.Changed += new FileSystemEventHandler(sender);
 
-            watcher.EnableRaisingEvents = true;
+                watcher.EnableRaisingEvents = true;
 
-            Console.WriteLine("Enter \'q\' for close application");
-            while (Console.Read() != 'q') ;
+                Console.WriteLine("Enter \'q\' for close application");
+                while (Console.Read() != 'q') ;
+            }
+            else
+                throw new ArgumentNullException();
+            }
         }
     }
 }
