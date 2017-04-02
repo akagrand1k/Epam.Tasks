@@ -34,7 +34,7 @@ namespace Epam.Users.FileDAL
             if (award == null)
                 throw new ArgumentNullException();
             var writeMessage = $"{award.Id = GetMaxId(AppConst.awardsPath) + 1 };{award.Title}" + Environment.NewLine;
-            File.AppendAllText(AppConst.dataPath, writeMessage
+            File.AppendAllText(AppConst.awardsPath, writeMessage
                 , Encoding.Default);
             ReWriteId(award.Id,AppConst.awardsPath);
             return true;

@@ -81,6 +81,51 @@ namespace Epam.Users.UI
             }
         }
 
+        private static void ShowAwards()
+        {
+            Console.Clear();
+            var entities = awardslogic.GetAll;
+            if (entities == null)
+            {
+                Console.WriteLine("Awards not found. Please create awards");
+                returnToMenu();
+            }
+            else
+            {
+                Console.WriteLine($"Total awards:{entities.Count()}");
+                PrintAwards(entities);
+                returnToMenu();
+            }
+        }
+
+        private static void PrintAwards(IEnumerable<Award> entities)
+        {
+            foreach (var item in entities)
+            {
+                Console.WriteLine($"Id = {item.Id};  Title = {item.Title}");
+            }
+        }
+        private static void AwardsCreate()
+        {
+            Console.Clear();
+            Award award = new Award();
+            Console.WriteLine("Enter Award title:\n");
+            Console.WriteLine("Title:");
+            award.Title = Console.ReadLine();
+            awardslogic.AddAwards(award);
+            Console.WriteLine("Awards create successfull");
+            returnToMenu();
+        }
+
+        private static void returnToMenu()
+        {
+            Console.ReadLine();
+            Console.Clear();
+            StartMenu();
+        }
+
+        #region User
+
         private static void DeleteUser()
         {
             var entities = userlogic.GetAll;
@@ -135,47 +180,6 @@ namespace Epam.Users.UI
                 Console.WriteLine($"Id = {item.Id};  Name = {item.Name};  DateBirthday = {item.DateOfBirth.ToShortDateString()};  Age = {item.Age}");
             }
         }
-
-        private static void ShowAwards()
-        {
-            Console.Clear();
-            var entities = awardslogic.GetAll;
-            if (entities == null)
-            {
-                Console.WriteLine("Awards not found. Please create awards");
-                returnToMenu();
-            }
-            else
-            {
-                Console.WriteLine($"Total awards:{entities.Count()}");
-                PrintAwards(entities);
-                returnToMenu();
-            }
-        }
-
-        private static void PrintAwards(IEnumerable<Award> entities)
-        {
-            foreach (var item in entities)
-            {
-                Console.WriteLine($"Id = {item.Id};  Title = {item.Title}");
-            }
-        }
-        private static void AwardsCreate()
-        {
-            Console.Clear();
-            Award award = new Award();
-            Console.WriteLine("Enter Award title:\n");
-            Console.WriteLine("Title:");
-            award.Title = Console.ReadLine();
-            Console.WriteLine("Awards create successfull");
-            returnToMenu();
-        }
-
-        private static void returnToMenu()
-        {
-            Console.ReadLine();
-            Console.Clear();
-            StartMenu();
-        }
+        #endregion
     }
 }
