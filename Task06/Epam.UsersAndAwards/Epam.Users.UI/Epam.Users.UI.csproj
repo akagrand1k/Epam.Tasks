@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Epam.Users.Constants\Epam.Users.Constants.csproj">
+      <Project>{5B8DE1B5-6D8A-4E73-8005-52DC8ACF8AA7}</Project>
+      <Name>Epam.Users.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epam.Users.Entities\Epam.Users.Entities.csproj">
       <Project>{2145E74E-0D9B-490A-9CC6-CF7FBB809164}</Project>
       <Name>Epam.Users.Entities</Name>
