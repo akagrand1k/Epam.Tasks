@@ -24,6 +24,13 @@ namespace Epam.Users.Logic
             }
         }
 
+        public string GetById(int id)
+        {
+            if (id == 0)
+                throw new ArgumentException();
+            return awardslogic.GetAwardsById(id);
+        }
+
         public void AddAwards(Award award)
         {
             if (award == null)

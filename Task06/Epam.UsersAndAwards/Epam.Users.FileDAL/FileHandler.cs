@@ -40,6 +40,18 @@ namespace Epam.Users.FileDAL
             return true;
         }
 
+        public bool CSVWriter(UserAwards aw)
+        {
+            if (aw == null)
+                throw new ArgumentNullException();
+
+            var writeMessage = $"{aw.Id = GetMaxId(AppConst.userAwardsPath) + 1 };{aw.UserId};{aw.AwardsId}" + Environment.NewLine;
+            File.AppendAllText(AppConst.userAwardsPath, writeMessage
+                , Encoding.Default);
+            ReWriteId(aw.Id, AppConst.userAwardsPath);
+            return true;
+        }
+
         /// <summary>
         /// Rewrite id after create new entity
         /// </summary>
@@ -96,6 +108,18 @@ namespace Epam.Users.FileDAL
                 {
                     Id = int.Parse(z[0]),
                     Title = z[1]
+                });
+        }
+
+        public IEnumerable<UserAwards> ReadAllUserAwards()
+        {
+            return File.ReadAllLines(AppConst.userAwardsPath, Encoding.Default).Skip(2)
+                .Select(x => x.Split(';'))
+                .Select(z => new UserAwards
+                {
+                    Id= int.Parse(z[0]),
+                    UserId = int.Parse(z[1]),
+                    AwardsId = int.Parse(z[2]),
                 });
         }
 

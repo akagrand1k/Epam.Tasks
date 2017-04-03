@@ -16,11 +16,13 @@ namespace Epam.Users.UI
     {
         private static IUserContracts userlogic;
         private static IAwardsCrud awardslogic;
+        private static IUserAwardsCrud userawardslogic;
 
         public StartApplication()
         {
             userlogic = new UserContracts();
             awardslogic = new AwardsContracts();
+            userawardslogic = new UserAwardsContracts();
             ExtensionInit();
         }
 
@@ -31,6 +33,7 @@ namespace Epam.Users.UI
             AppExtension.CheckSystemFile();
             handler.WriteHeader(AppExtension.GetUserHeader, AppConst.dataPath);
             handler.WriteHeader(AppExtension.GetAwardsProperty, AppConst.awardsPath);
+            handler.WriteHeader(AppExtension.GetUserAwardsProperty, AppConst.userAwardsPath);
         }
 
         public static void StartMenu()
@@ -42,6 +45,7 @@ namespace Epam.Users.UI
                 + "3 - Delete users by Name\n"
                 + "4 - Create awards\n"
                 + "5 - Show awards list\n"
+                + "6 - Add awards for user\n"
                 + "q - For exit application\n"
                 );
             CaseMenu();
@@ -73,12 +77,38 @@ namespace Epam.Users.UI
                     ShowAwards();
                     break;
 
+                case ConsoleKey.D6:
+                    AddUserAwards();
+                    break;
+
                 case ConsoleKey.Q:
                     Console.WriteLine("\nApplication closed...");
                     Console.ReadKey();
                     return;
 
             }
+        }
+
+        private static void AddUserAwards()
+        {
+            var users = userlogic.GetAll;
+            var awards = awardslogic.GetAll;
+            UserAwards ua = new UserAwards();
+
+            Console.WriteLine("\nUsers\n\n\n");
+            PrintUsers(users);
+            Console.WriteLine("Awards\n\n\n");
+            PrintAwards(awards);
+            Console.WriteLine("Write Username for gived awards");
+            var name = Console.ReadLine();
+            ua.UserId = users.Where(x => x.Name.Contains(name)).FirstOrDefault().Id;
+            Console.WriteLine("Write awards title");
+            var title = Console.ReadLine();
+            ua.AwardsId = awards.Where(x => x.Title.Contains(title)).FirstOrDefault().Id;
+            userawardslogic.CreateUserAwards(ua);
+            Console.WriteLine("User awards add Successfull");
+            Console.Clear();
+            AddUserAwards();
         }
 
         private static void ShowAwards()
@@ -161,14 +191,12 @@ namespace Epam.Users.UI
             if (entities == null)
             {
                 Console.WriteLine("Users not found. Please create user");
-                Console.ReadLine();
-                Console.Clear();
-                StartMenu();
+                returnToMenu();
             }
             else
             {
                 Console.WriteLine($"Total users:{entities.Count()}");
-                PrintUsers(entities);
+                PrintUsers();
                 returnToMenu();
             }
         }
@@ -179,6 +207,38 @@ namespace Epam.Users.UI
             {
                 Console.WriteLine($"Id = {item.Id};  Name = {item.Name};  DateBirthday = {item.DateOfBirth.ToShortDateString()};  Age = {item.Age}");
             }
+        }
+
+        private static void PrintUsers()
+        {
+            var userawards = userawardslogic.GetAllUserAwards;
+            var awards = awardslogic.GetAll;
+            var users = userlogic.GetAll;
+
+            foreach (var user in users)
+            {
+                var temp = StringConcat(user);
+                foreach (var ua in userawards)
+                {
+                    if (user.Id == ua.UserId)
+                        temp += "\nMedals:" + awardslogic.GetById(ua.AwardsId) +";";
+                }
+                Console.WriteLine(temp);
+            }
+        }
+
+        public string GetAwardsById(int id)
+        {
+            return awardslogic.GetAll.Where(x => x.Id.ToString().Contains(id.ToString())).FirstOrDefault().Title;
+        }
+
+        private string AwardsList(int userid)
+        {
+            return string.Empty;
+        }
+        private static string StringConcat(User item)
+        {
+            return $"Id = {item.Id};  Name = {item.Name};  DateBirthday = {item.DateOfBirth.ToShortDateString()};  Age = {item.Age}";
         }
         #endregion
     }

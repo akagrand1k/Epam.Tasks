@@ -14,8 +14,10 @@ namespace Epam.Users.Logic
         {
             UserDao = new UserFileDao();
             AwardsDao = new AwardsDao();
+            userAwardsDao = new UserAwardsDao();
         }
         public static IUserDao UserDao { get; }
         public static IAwardsDao AwardsDao { get; }
+        public static IUserAwardsDao userAwardsDao { get; }
     }
 }

@@ -11,21 +11,14 @@ namespace Epam.Users.Constants
         public const string ConfigFolder = "Config";
         public const string StorageFolder = "FileStorage";
 
-        public const string LogFile = "log.txt";
-        public const string DataStorageFile = "Users.csv";
-        public const string AwardStorageFile = "Awards.csv";
-
+       private const string LogFile = "log.txt";
+       private const string DataStorageFile = "Users.csv";
+       private const string AwardStorageFile = "Awards.csv";
+       private const string UserAwards = "UserAwards.csv";
 
         public const string logPath = ConfigFolder + @"\" + LogFile;
         public const string dataPath = StorageFolder + @"\" + DataStorageFile;
         public const string awardsPath = StorageFolder + @"\" + AwardStorageFile;
-
-        //public static string[] AwardsList
-        //{
-        //    get
-        //    {
-        //        return new string[] { "Golden", "Silver", "Bronze" };
-        //    }
-        //}
+        public const string userAwardsPath = StorageFolder + @"\" + UserAwards;
     }
 }
