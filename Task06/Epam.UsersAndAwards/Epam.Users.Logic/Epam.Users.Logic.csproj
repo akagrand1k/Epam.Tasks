@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AwardsContracts.cs" />
     <Compile Include="DaoProvider.cs" />
+    <Compile Include="UserAwardsContracts.cs" />
     <Compile Include="UserContracts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

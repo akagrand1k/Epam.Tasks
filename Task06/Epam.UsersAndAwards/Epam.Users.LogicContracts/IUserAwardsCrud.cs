@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Users.LogicContracts
 {
-    public interface IAwardsCrud
+    public interface IUserAwardsCrud
     {
-        void AddAwards(Award award);
-        IEnumerable<Award> GetAll { get; }
-        string GetById(int id);
+        void CreateUserAwards(UserAwards ua);
+        IEnumerable<UserAwards> GetAllUserAwards { get; }
     }
 }

@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Users.DAOContracts
 {
-    public interface IAwardsDao
+    public interface IUserAwardsDao
     {
-        bool CreateAwards(Award award);
-        IEnumerable<Award> GetAwards { get; }
-        string GetAwardsById(int id);
+        bool CreateAwards(UserAwards ua);
+        IEnumerable<UserAwards> GetAll { get;}
     }
 }

@@ -29,7 +29,7 @@ namespace Epam.Users.Extension
         /// </summary>
         public static void CheckSystemFile()
         {
-            var paths = new[] { AppConst.logPath, AppConst.dataPath ,AppConst.awardsPath };
+            var paths = new[] { AppConst.logPath, AppConst.dataPath ,AppConst.awardsPath,AppConst.userAwardsPath};
             List<string> createPaths = new List<string>();
 
             foreach (var path in paths)
@@ -76,7 +76,15 @@ namespace Epam.Users.Extension
         {
             get
             {
-                return typeof(User).GetProperties().Select(x => x.Name).ToArray();
+                return typeof(Award).GetProperties().Select(x => x.Name).ToArray();
+            }
+        }
+
+        public static IEnumerable<string> GetUserAwardsProperty
+        {
+            get
+            {
+                return typeof(UserAwards).GetProperties().Select(x => x.Name).ToArray();
             }
         }
     }

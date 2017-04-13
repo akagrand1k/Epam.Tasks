@@ -8,30 +8,25 @@ using Epam.Users.Entities;
 
 namespace Epam.Users.FileDAL
 {
-    public class AwardsDao : IAwardsDao
+    public class UserAwardsDao : IUserAwardsDao
     {
         private FileHandler handler = new FileHandler();
 
-        public IEnumerable<Award> GetAwards
+        public IEnumerable<UserAwards> GetAll
         {
             get
             {
-                return handler.ReadAllAwards();
+                return handler.ReadAllUserAwards();
             }
         }
 
-        public bool CreateAwards(Award award)
+        public bool CreateAwards(UserAwards ua)
         {
-            if (award == null)
+            if (ua == null)
                 throw new ArgumentNullException();
 
-            handler.CSVWriter(award);
+            handler.CSVWriter(ua);
             return true;
-        }
-
-        public string GetAwardsById(int id)
-        {
-            return GetAwards.Where(x => x.Id.ToString().Contains(id.ToString())).FirstOrDefault().Title;
         }
     }
 }
