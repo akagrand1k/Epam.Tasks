@@ -1,0 +1,18 @@
+
+.container-menu{
+	width:200px;
+	border: solid 1px #000;
+	border-radius: 5px;
+	background-color: #f9e497;
+	box-shadow: 5px 5px #880000;
+}
+
+.container-menu ul{
+ list-style-type: none;
+}
+
+.container-menu li{
+	color:#880000;
+	font-size: 15px;
+	margin-left: -30px;
+}

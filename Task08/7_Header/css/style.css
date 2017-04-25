@@ -1,0 +1,29 @@
+body,html{
+	padding: 0;
+	margin:0;
+}
+.header{
+	position: relative;
+}
+
+.header{
+	background: #008b66;
+	padding: 7px;
+	color:#fff;
+	z-index: 1;
+}
+
+.layer{
+	padding:0;
+	position: absolute;
+	margin-top: -5px;
+	width: 93%;
+	left:7%;
+	background: #dfe6e1;
+	z-index: 2;
+}
+
+.layer p{
+	margin:0;
+	padding: 7px;
+}

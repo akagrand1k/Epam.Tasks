@@ -1,0 +1,67 @@
+body,html{
+	padding: 0;
+	margin:0;
+}
+
+body{
+	background: #4e6379;
+}
+
+.main-wrapp{
+width: 906px;/**/
+background: #fff;
+overflow: hidden;
+border: none;
+box-shadow: 0 0 25px #000;
+border-radius: 7px;
+margin:30px auto;
+}
+
+/*скрытие границы первого блока*/
+.main-wrapp div:first-child{
+	border:none;
+}
+
+.item{
+	width:300px;
+	border-left: 1px solid #d9d9d9;
+	float:left;
+	margin:10px auto;
+	text-align: center;
+}
+
+.item div{
+	margin:0 auto;
+}
+	
+.item p:nth-child(even){
+	color:#f56332;
+	font-weight: bold;
+}
+
+.item a{
+	padding:3px;
+	margin:0 auto;
+	text-decoration: none;
+	width:80px;
+	height: 15px;
+	background: #f56332;
+	color:#fff;
+	border-radius:1px;
+	padding: 3px;	
+}
+
+/*Image sprite class*/
+.icon{
+	width: 84px;
+	height: 56px;
+	background: url(../img/task08.jpg);
+}
+
+.cloud{
+background-position: 0 111px;
+}
+
+.server{
+background-position: 0 56px;
+}
