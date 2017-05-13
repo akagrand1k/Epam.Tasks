@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="cdreset()">
+	<p class="timer">
+	Page2 <br>
+		Вы будете перенаправлены через: 
+		<span id="time"></span>
+		<br>
+		<input type="button" value="Возобновить" onclick="countdown()"><br>
+		<input type="button" value="Приостановить" onclick="cdpause()"><br>
+		<a href="page1.html"><button>Предыдущая страница</button></a>
+	</p>
+
+	<script src="js/script.js"></script>
+	<script>
+		function nextPage() {
+			document.location.href = "page3.html";
+		}
+	</script>
+</body>
+</html>

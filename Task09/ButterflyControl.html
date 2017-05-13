@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		select{
+			width:180px;
+			height: 100px;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+<select name="" id="selectLeft" multiple>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+  <option value="3">Option 3</option>
+  <option value="4">Option 4</option>
+  <option value="5">Option 5</option>
+</select>
+
+<input type="button" onclick="selectMoves(selectLeft,selectRight)" value=">">
+<input type="button" onclick="selectMoves(selectRight,selectLeft)" value="<">
+
+<input type="button"  value="<<" onclick="moveAllOptions(selectRight,selectLeft)">
+<input type="button" value=">>" onclick="moveAllOptions(selectLeft,selectRight)">
+
+<select name="" id="selectRight" multiple>
+</select>
+
+<script>
+function selectMoves(sourceSelect, resultSelect) {
+
+    selectedCheck(sourceSelect);
+
+    for (var i = sourceSelect.length - 1; i >= 0; i--) {
+        var option = sourceSelect.options[i];
+        if (option.selected == true) {
+            var newSelect = new Option(option.text, option.value);
+            resultSelect.options[resultSelect.length] = newSelect;
+            sourceSelect[i] = null;
+        }
+    }
+
+    function selectedCheck() {
+        var flag = 0;
+
+        for (var i = 0; i < sourceSelect.length; i++)
+            if (sourceSelect[i].selected == true) flag++;
+
+        if (flag == 0) alert('Не выделен ни один элемент!');
+
+        return;
+    }
+}
+
+function moveAllOptions(sourceSelect, resultSelect) {
+    for (var i = sourceSelect.length - 1; i >= 0; i--) {
+        var newSelect = new Option(sourceSelect[i].text, sourceSelect[i].value);
+        sourceSelect[i] = null;
+        resultSelect.options[resultSelect.length] = newSelect;
+    }
+}
+</script>
+</body>
+</html>

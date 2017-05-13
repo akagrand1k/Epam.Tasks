@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<p class="timer">
+    Page3 <br>
+    <a href="page1.html">
+        <button>
+            Начать заново
+        </button>
+    </a>
+
+    <button onclick="closeTab()">
+        Закрыть меня
+    </button>
+    <a href="page2.html"><button>Предыдущая страница</button></a>
+    </p>
+    <script>
+        function closeTab(){
+            window.open('', '_self', '');
+            window.close();
+        }
+    </script>
+</body>
+</html>
