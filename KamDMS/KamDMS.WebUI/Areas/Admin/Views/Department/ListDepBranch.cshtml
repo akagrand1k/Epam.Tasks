@@ -1,0 +1,61 @@
+﻿@model KamDMS.WebUI.Areas.Admin.Models.DepBranchs.DepBranchViewModel
+
+@{
+    ViewBag.Title = "Список отделов";
+}
+
+
+<div class="portlet box green">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-comments"></i>Отделы
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-toolbar">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="@Url.Action("EditDepBranch","Department")" class="btn green">
+                        Добавить
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="table-scrollable">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Начальник отдела</th>
+                        <th>Подразделение</th>
+                        <th>Дата создания</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ListDepBranch.Count == 0)
+                    {
+                        <tr><td colspan="5" class="text-center">Записи отсутствуют</td></tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.ListDepBranch)
+                        {
+                            <tr>
+                                <td>@item.NameBranch</td>
+                                <td>@item.BranchLeader</td>
+                                <td>@item.Department.NameDep</td>
+                                <td>@item.DateCreate</td>
+                                <td>
+                                    @Html.ActionLink(" ", "EditDepBranch", "Department", new { @Id = @item.Id }, new { @class = "btn btn-sm green fa fa-edit" })
+                                    @Html.ActionLink(" ", "DeleteDepBranch", "Department", new { @Id = @item.Id }, new { @class = "btn btn-sm red fa fa-times" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

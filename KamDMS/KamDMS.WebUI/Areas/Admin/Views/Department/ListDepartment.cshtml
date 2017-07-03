@@ -1,0 +1,59 @@
+﻿@model KamDMS.WebUI.Areas.Admin.Models.Department.DepartmentViewModel
+
+@{
+    ViewBag.Title = "Список подразделений";
+}
+
+
+<div class="portlet box green">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-comments"></i>Подразделения
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-toolbar">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="@Url.Action("EditDepartment","Department")" class="btn green">
+                        Добавить
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="table-scrollable">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Руководитель</th>
+                        <th>Дата создания</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ListDepartment.Count==0)
+                    {
+                        <tr><td colspan="4">Записи отсутствуют</td></tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.ListDepartment)
+                        {
+                            <tr>
+                                <td>@item.NameDep</td>
+                                <td>@item.LeadersName</td>
+                                <td>@item.DateCreate</td>
+                                <td>
+                                    @Html.ActionLink(" ", "EditDepartment", "Department", new { @Id = @item.Id }, new { @class = "btn btn-sm green fa fa-edit" })  
+                                    @Html.ActionLink(" ", "DeleteDepartment", "Department", new { @Id = @item.Id }, new { @class = "btn btn-sm red fa fa-times" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

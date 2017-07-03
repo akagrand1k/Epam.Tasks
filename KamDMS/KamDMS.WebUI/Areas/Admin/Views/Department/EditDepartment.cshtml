@@ -1,0 +1,46 @@
+﻿@model KamDMS.WebUI.Areas.Admin.Models.Department.DepartmentViewModel
+
+@{
+    ViewBag.Title = "Редактирование подразделения";
+}
+<!-- BEGIN SAMPLE FORM PORTLET-->
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-settings font-green-haze"></i>
+            <span class="caption-subject bold uppercase"> Подразделения</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+            <div class="form-body">
+                @Html.AntiForgeryToken()
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">Наименование подразделения</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.DepName, new { @class = "required form-control", placeholder = "Введите название комитета", id = "txtNameDep" })
+                        @Html.ValidationMessageFor(x => x.DepName)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">ФИО руководителя</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.LeadersName, new { @class = "required form-control", placeholder = "Введите ФИО Руководителя", id = "txtLeaderName" })
+                        @Html.ValidationMessageFor(x => x.LeadersName)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationSummary()
+                <button class="btn green">
+                    Сохранить
+                </button>
+            </div>
+        }
+    </div>
+</div>
+<!-- END SAMPLE FORM PORTLET-->

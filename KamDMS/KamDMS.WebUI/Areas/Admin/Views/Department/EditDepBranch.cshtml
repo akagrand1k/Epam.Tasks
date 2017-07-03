@@ -1,0 +1,59 @@
+﻿@model KamDMS.WebUI.Areas.Admin.Models.DepBranchs.DepBranchViewModel
+
+@{
+    ViewBag.Title = "Редактирование отдела";
+}
+<!-- BEGIN SAMPLE FORM PORTLET-->
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-settings font-green-haze"></i>
+            <span class="caption-subject bold uppercase"> Отделы</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(x=>x.Id)
+            <div class="form-body">
+                @Html.AntiForgeryToken()
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">Наименование отдела</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.BranchName, new { @class = "required form-control", placeholder = "Введите название отдела", id = "txtNameBranch" })
+                        @Html.ValidationMessageFor(x => x.BranchName)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">ФИО начальника отдела</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.BranchLeaderName, new { @class = "required form-control", placeholder = "Введите ФИО Начальника отдела", id = "txtBranchLeader" })
+                        @Html.ValidationMessageFor(x => x.BranchLeaderName)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">Выберите отдел</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.DepId, new SelectList(ViewBag.SelectListDep, "Id", "NameDep"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.DepId)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                
+                <button class="btn green">
+                    Сохранить
+                </button>
+                @Html.ValidationSummary()
+            </div>
+        }
+    </div>
+</div>
+<!-- END SAMPLE FORM PORTLET-->

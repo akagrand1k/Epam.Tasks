@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Пользователи и награды</title>
+        <link href="~/themes/css/reset.css" rel="stylesheet" />
+        <link href="~/themes/css/style.css" rel="stylesheet" />
+
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="header">
+                <a href="~/Pages/Index.cshtml">
+                    <img class="logo" src="~/themes/img/logo.jpg" />
+                </a>
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="~/Pages/User/List.cshtml">Пользователи</a></li>
+                        <li><a href="~/Pages/Award/List.cshtml">Награды</a></li>
+                    </ul>
+                </div>
+            </div>
+
+           @RenderBody()
+
+            <footer>
+                <h4>Footer</h4>
+                <p>Footer text</p>
+            </footer>
+
+        </div>
+
+        
+
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

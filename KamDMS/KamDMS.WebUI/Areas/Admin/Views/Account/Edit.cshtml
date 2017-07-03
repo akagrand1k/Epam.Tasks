@@ -1,0 +1,66 @@
+﻿@model KamDMS.WebUI.Areas.Admin.Models.User.UpdateUserViewModel
+
+@{
+    ViewBag.Title = "Регистрация пользователя";
+}
+<!-- BEGIN SAMPLE FORM PORTLET-->
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption font-green-haze">
+            <i class="icon-settings font-green-haze"></i>
+            <span class="caption-subject bold uppercase"> Пользователи</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+            <div class="form-body">
+                @Html.AntiForgeryToken()
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">Фамилия</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "required form-control", placeholder = "Введите фамилию", id = "txtFirstName" })
+                        @Html.ValidationMessageFor(x => x.FirstName)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">Имя</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.MiddleName, new { @class = "required form-control", placeholder = "Введите имя", id = "txtMiddleName" })
+                        @Html.ValidationMessageFor(x => x.MiddleName)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">Отчество</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "required form-control", placeholder = "Введите отчество", id = "txtLastName" })
+                        @Html.ValidationMessageFor(x => x.LastName)
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="form_control_1">Отдел</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(x => x.BranchId, Model.SelectBranchList, " ", new { @class = "form-control" })
+                        <div class="form-control-focus">
+                        </div>
+                    </div>
+                </div>
+
+                @Html.ValidationSummary()
+                <button class="btn green">
+                    Сохранить
+                </button>
+            </div>
+        }
+    </div>
+</div>
+<!-- END SAMPLE FORM PORTLET-->
